@@ -1,16 +1,14 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instalación de angular
+- Debe tener antes instalado nodejs para utilizar el npm
+- Comando: npm install -g @angular/cli
+- En caso de fallar debe ejecutar la politica de la poweShell 
+    - para windows "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
+    - para linux "sudo npm install -g @angular/cli"
 
-Currently, two official plugins are available:
+- Despues de asegurarse que se tiene instalado el angular verifica la versión con el comando:
+    ng version.
+- Instalar el node_nodules para que el proyecto compile en angular 
+    npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
