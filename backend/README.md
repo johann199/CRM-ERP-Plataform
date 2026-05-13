@@ -14,3 +14,17 @@ Nota: en caso de colocar otro nombre ejemplo: erp se debe activar así -> .erp\S
     pip install requirements.txt.
 
 Con esto de momento esta listo el backend, falta la configuración a la base de datos que estoy en ese tema el día de hoy.
+
+### Archivo .env
+- Crear un archivo .env en la carpeta del backend con la siguiente configuración
+    DATABASE_URL = "postgresql://postgres:erp_1234@localhost:5433/erp_db"
+    SECRET_KEY = ""
+
+
+## Activar el docker
+
+- docker compose up -d
+
+### Iniciar la aplicación desde el backend
+- dentro de la carpeta backend ejerucutar el comando:
+    - fastapi dev
