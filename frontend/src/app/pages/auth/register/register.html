@@ -1,0 +1,128 @@
+<div class="register-page bg-body-secondary min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="#"><b>ERP</b>CRM</a>
+    </div>
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="register-box-msg">Crear una cuenta nueva</p>
+
+        <form (ngSubmit)="onSubmit()">
+          <!-- Nombre -->
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre"
+              [(ngModel)]="firstName"
+              name="firstName"
+              required
+            />
+            <div class="input-group-text">
+              <span class="bi bi-person"></span>
+            </div>
+          </div>
+
+          <!-- Apellido -->
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Apellido"
+              [(ngModel)]="lastName"
+              name="lastName"
+              required
+            />
+            <div class="input-group-text">
+              <span class="bi bi-person"></span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="input-group mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Correo electrónico"
+              [(ngModel)]="email"
+              name="email"
+              required
+            />
+            <div class="input-group-text">
+              <span class="bi bi-envelope"></span>
+            </div>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Contraseña"
+              [(ngModel)]="password"
+              name="password"
+              required
+            />
+            <div class="input-group-text">
+              <span class="bi bi-lock-fill"></span>
+            </div>
+          </div>
+
+          <!-- Confirmar contraseña -->
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Confirmar contraseña"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              required
+            />
+            <div class="input-group-text">
+              <span class="bi bi-lock-fill"></span>
+            </div>
+          </div>
+
+          <!-- Error -->
+          @if (errorMessage) {
+            <div class="alert alert-danger py-2">
+              {{ errorMessage }}
+            </div>
+          }
+
+          <!-- Términos y botón -->
+          <div class="row">
+            <div class="col-8">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="terms"
+                  [(ngModel)]="acceptTerms"
+                  name="terms"
+                />
+                <label class="form-check-label" for="terms">
+                  Acepto los <a href="#">términos</a>
+                </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary" [disabled]="loading">
+                  @if (loading) {
+                    <span class="spinner-border spinner-border-sm me-1"></span>
+                  }
+                  Registrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <p class="mb-0 mt-3">
+          <a routerLink="/auth/login">Ya tengo cuenta</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
