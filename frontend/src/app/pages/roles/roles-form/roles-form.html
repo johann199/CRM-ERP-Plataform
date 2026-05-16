@@ -1,0 +1,138 @@
+<div class="container-fluid">
+
+  <!-- Encabezado -->
+  <div class="d-flex align-items-center mb-4 gap-2">
+    <a routerLink="/dashboard/roles" class="btn btn-outline-secondary btn-sm">
+      <i class="bi bi-arrow-left"></i> Volver
+    </a>
+    <div>
+      <h4 class="mb-0">{{ esEdicion ? 'Editar rol' : 'Nuevo rol' }}</h4>
+      <small class="text-muted">{{ esEdicion ? 'Modificá los permisos del rol' : 'Creá un nuevo rol personalizado' }}</small>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- Datos del rol -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0">Datos del rol</h6>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Nombre del rol</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ej: Supervisor"
+              [(ngModel)]="rolNombre"
+              [disabled]="esRolBase"
+            />
+            @if (esRolBase) {
+              <small class="text-muted">Los roles base no pueden renombrarse</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              placeholder="Descripción del rol..."
+              [(ngModel)]="rolDescripcion"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Usuarios asignados</label>
+            <div class="d-flex flex-wrap gap-2">
+              @for (usuario of usuariosAsignados; track usuario.id) {
+                <span class="badge bg-light text-dark border">
+                  <i class="bi bi-person me-1"></i>{{ usuario.nombre }}
+                  <button class="btn-close btn-close-sm ms-1"
+                          style="font-size:0.5rem"
+                          (click)="quitarUsuario(usuario.id)">
+                  </button>
+                </span>
+              }
+              <button class="btn btn-sm btn-outline-primary" (click)="agregarUsuario()">
+                <i class="bi bi-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de permisos -->
+    <div class="col-md-8 mb-4">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h6 class="mb-0">Permisos por módulo</h6>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-success" (click)="marcarTodo(true)">
+              <i class="bi bi-check-all"></i> Marcar todo
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="marcarTodo(false)">
+              <i class="bi bi-x-lg"></i> Desmarcar todo
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-bordered mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Módulo</th>
+                <th class="text-center">Ver</th>
+                <th class="text-center">Crear</th>
+                <th class="text-center">Editar</th>
+                <th class="text-center">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (modulo of modulos; track modulo.nombre) {
+                <tr>
+                  <td>
+                    <i class="bi me-2" [class]="modulo.icono"></i>
+                    {{ modulo.nombre }}
+                  </td>
+                  <td class="text-center">
+                    <input type="checkbox" class="form-check-input"
+                           [(ngModel)]="modulo.permisos.ver"
+                           (change)="onVerChange(modulo)" />
+                  </td>
+                  <td class="text-center">
+                    <input type="checkbox" class="form-check-input"
+                           [(ngModel)]="modulo.permisos.crear"
+                           [disabled]="!modulo.permisos.ver" />
+                  </td>
+                  <td class="text-center">
+                    <input type="checkbox" class="form-check-input"
+                           [(ngModel)]="modulo.permisos.editar"
+                           [disabled]="!modulo.permisos.ver" />
+                  </td>
+                  <td class="text-center">
+                    <input type="checkbox" class="form-check-input"
+                           [(ngModel)]="modulo.permisos.eliminar"
+                           [disabled]="!modulo.permisos.ver" />
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botones -->
+  <div class="d-flex justify-content-end gap-2">
+    <a routerLink="/dashboard/roles" class="btn btn-outline-secondary">
+      Cancelar
+    </a>
+    <button class="btn btn-primary" (click)="guardar()">
+      <i class="bi bi-save me-1"></i> Guardar cambios
+    </button>
+  </div>
+
+</div>

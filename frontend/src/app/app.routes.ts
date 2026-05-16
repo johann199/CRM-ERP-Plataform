@@ -10,9 +10,7 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadComponent: () =>
-      import('./layouts/auth-layout/auth-layout').then(
-        (m) => m.AuthLayout
-      ),
+      import('./layouts/auth-layout/auth-layout').then((m) => m.AuthLayout),
     children: [
       {
         path: 'login',
@@ -30,15 +28,34 @@ export const routes: Routes = [
     path: 'dashboard',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./layouts/main-layout/main-layout').then(
-        (m) => m.MainLayout
-      ),
+      import('./layouts/main-layout/main-layout').then((m) => m.MainLayout),
     children: [
       {
         path: '',
         loadComponent: () =>
           import('./pages/dashboard/dashboard/dashboard').then(
             (m) => m.Dashboard
+          ),
+      },
+      {
+        path: 'roles',
+        loadComponent: () =>
+          import('./pages/roles/roles-list/roles-list').then(
+            (m) => m.RolesList
+          ),
+      },
+      {
+        path: 'roles/nuevo',
+        loadComponent: () =>
+          import('./pages/roles/roles-form/roles-form').then(
+            (m) => m.RolesForm
+          ),
+      },
+      {
+        path: 'roles/:id/editar',
+        loadComponent: () =>
+          import('./pages/roles/roles-form/roles-form').then(
+            (m) => m.RolesForm
           ),
       },
     ],
